@@ -14,6 +14,8 @@ import Form from "./components/Form";
 import Status from "./components/Status";
 import MedicationItemList from "./components/MedicationItemList";
 
+
+
 function App(props) {
   const [viewCalendar, setViewCalendar] = useState(false);
   const [viewUser, setViewUser] = useState(false);
@@ -101,6 +103,7 @@ function App(props) {
           onClick={calendarBoolean}
         />
       </nav>
+
       <span className="component">
         {viewUser && hasValue && (
 
@@ -117,6 +120,8 @@ function App(props) {
         {/* components here */}
         {/* <Calendar /> */}
       </span>
+
+
     </main>
   );
 }

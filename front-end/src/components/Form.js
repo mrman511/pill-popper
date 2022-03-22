@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "./Form.scss";
 
+
 export default function Form(props) {
   const children = Object.values(props.children)
   const [medicationName, setMedicationName] = useState("" || props.medName);
   const [childId, setChildId] = useState("" || props.ChildId);
   const [dose, setDose] = useState("" || props.dose);
   const [withFood, setWithFood] = useState(false || props.withFood);
+
+  
 
   const toggleWithFood = function () {
     if (withFood) {
@@ -44,6 +47,9 @@ export default function Form(props) {
   
 
   return (
+
+        
+   
     <main className="medication__form">
       <section className="medication__form--main">
         <form className="medication__form--create">
@@ -92,13 +98,23 @@ export default function Form(props) {
               <input type="checkbox" value={withFood} onClick={toggleWithFood} defaultChecked={withFood}/>
             </span>
           </div>
+     
         </form>
+        
+        
       </section>
-
+      <div>
+        
+        </div>
       <section className="medication__form--actions">
+    
         <button onClick={save}>Save</button>
         <button onClick={cancel}>Cancel</button>
-      </section>
+      </section>  
+      
+       
+ 
     </main>
+   
   );
 }
