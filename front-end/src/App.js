@@ -33,7 +33,7 @@ function App(props) {
   const [selectedMed, setSelectedMed] = useState({})
 
   console.log("Rendering App")
-
+console.log("medications", medications)
   const [state, setState] = useState({
     medications:[],
     child: "",
@@ -64,8 +64,6 @@ function App(props) {
     axios
       .get("users/1/medications")
       .then((response) => {
-
-        console.log(response);
         setMedications((prev) => [
           {
             ...prev,
@@ -125,7 +123,7 @@ function App(props) {
           { mode === SAVING && < Status message='SAVING' /> }
           { mode === CALENDAR && <Calendar onChange={onChange} value={value} />}
 
-          { mode === CREATE && <Form  transition = { transition } children={Object.values(state.children)} mode={mode} loaderMedications={loaderMedications}/>}
+          { mode === CREATE && <Form  transition = { transition } children={Object.values(state.children)} medications={medications} mode={mode} setMedications={setMedications} loaderMedications={loaderMedications}/>}
           { mode === EDIT && <Form transition = { transition } { ...selectedMed } mode={mode} medications={medications} setMedications={setMedications} loaderMedications={loaderMedications}/> }
           { mode !== CREATE && mode !== EDIT && mode !== SAVING && mode !== LOADING &&
             <footer>
