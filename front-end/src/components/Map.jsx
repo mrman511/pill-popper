@@ -19,15 +19,16 @@ const MapContainer = () => {
 
   const success = (position) => {
     const currentPosition = {
-      lat: position.coords.latitude,
+      lat: parseFloat(position.coords.latitude),
       lng: parseFloat(position.coords.longitude),
     };
     setCurrentPosition(currentPosition);
   };
 
   useEffect(() => {
+    
     navigator.geolocation.getCurrentPosition(success);
-  });
+  },[]);
 
   useEffect(() => {
     
@@ -61,7 +62,7 @@ console.log('dataaaaa:::: ', data)
 
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_KEY}>
-      <GoogleMap
+      {currentPosition.lng && <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={15}
         center={currentPosition}
@@ -101,7 +102,7 @@ console.log('dataaaaa:::: ', data)
             </div>
           </InfoWindow>
         )}
-      </GoogleMap>
+      </GoogleMap>}
     </LoadScript>
   );
 };

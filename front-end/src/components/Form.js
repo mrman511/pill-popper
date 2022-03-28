@@ -113,10 +113,11 @@ export default function Form(props) {
     }))
   }
 
-  const timeList = savedTime.map( time => (
-    <div className="each-time"> 
+  const timeList = savedTime.map( time => ( 
+    
+    <div className="each-time" key={time}> 
      <span> { time }</span>
-      <div onClick={() => handleRemoveTime(time)}><i class="fa-regular fa-circle-xmark"></i></div>
+      <div onClick={() => handleRemoveTime(time)}><i className="fa-regular fa-circle-xmark"></i></div>
      
     </div>
   ))
