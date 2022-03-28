@@ -27,8 +27,8 @@ const MapContainer = () => {
   })
   
   useEffect(() => {
-  axios.get(`/json?location=49.246292,-123.116226&radius=900000&types=pharmacy&key=AIzaSyCMQ-mY_tpOq_SxAEOtfQVZYZihqxtamkE`)
-  // axios.get(`/json?location=${currentPosition.lat},${currentPosition.lng}&radius=7000&types=pharmacy&key=AIzaSyCMQ-mY_tpOq_SxAEOtfQVZYZihqxtamkE`)
+  // axios.get(`/json?location=49.246292,-123.116226&radius=900000&types=pharmacy&key=AIzaSyCMQ-mY_tpOq_SxAEOtfQVZYZihqxtamkE`)
+  axios.get(`/json?location=${currentPosition.lat},${currentPosition.lng}&radius=2000&types=pharmacy&key=AIzaSyCMQ-mY_tpOq_SxAEOtfQVZYZihqxtamkE`)
   
   .then((res) => {
     setData((prev) => [
@@ -40,7 +40,7 @@ const MapContainer = () => {
    
   })
   .catch((error) => {console.log(error)})
-}, [])
+}, [currentPosition])
   
 
   console.log('current: ', currentPosition.lng);
