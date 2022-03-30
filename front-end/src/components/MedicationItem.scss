@@ -10,79 +10,68 @@
   display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
+  max-height: $card-height;
   margin: 1em;
   width: 90%;
 
 }
 
 .medication-item__pink {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
   border: 3px solid #ffc0cb;
+  animation-timing-function: ease-in;
 }
 .medication-item__purple {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
   border: 3px solid #9267af;
+  animation-timing-function: ease-in;
 }
 .medication-item__yellow {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
-
   border: 3px solid #f1edb8;
+  animation-timing-function: ease-in;
 }
 .medication-item__blue {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
-
   border: 3px solid #415ba3;
+  animation-timing-function: ease-in;
 }
 .medication-item__light-blue {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
-
   border: 3px solid #a4b4dd;
+  animation-timing-function: ease-in;
 }
 .medication-item__neutral {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
-
   border: 3px solid #b1a99d;
+  animation-timing-function: ease-in;
 }
 .medication-item__green {
-  display: flex;
   background-color: white;
   border-radius: 12px;
-  height: $card-height;
   margin: 1em;
   width: 90%;
-
   border: 3px solid #41a375;
+  animation-timing-function: ease-in;
+  animation-duration: .5s;
 }
 
 
@@ -110,7 +99,7 @@
 }
 .medication-time-name{
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
   flex-grow: 9;
 }

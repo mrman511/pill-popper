@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useState } from "react"
 import "./ChildrenList.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import ChildrenListItem from "./ChildrenListItem"
 
@@ -10,12 +12,16 @@ const ChildrenList = (props) => {
   const [addAChild, setAddAChild] = useState(false)
   
   const addChild = function() {
-    axios.post('/users/1/children/new', {
+    axios.post('http://localhost:8081/users/1/children/new', {
       name: name,
       avatar: color,
     })
     // console.log(name)
-    .then(setName(''), setAddAChild(false))
+    .then(() => {
+      setName('');
+      setAddAChild(false); 
+      props.loadChildren();
+    })
     .catch((err) => console.log(err))
   }
 
@@ -67,13 +73,16 @@ return (
               <option value="neutral">Neutral</option> 
               <option value="light-blue">Light Blue</option> 
               </select>
-              <button className="add-button" onClick={addChild} >Add</button>
+              <button className="add-button" type="button" onClick={addChild} >Add</button>
         </form>}
         <section className="children-actions">
         {/* <button className="add-button" onClick={addChild} >Add</button> */}
-        <button className="add-button" onClick={doAddChild} ><i class="fa-solid fa-person-circle-plus"></i></button>
+        <button className="add-button" onClick={doAddChild} ><i className="fa-solid fa-person-circle-plus"></i></button>
         <button className="add-button" onClick={() => props.onChange("")}>View all</button>
         </section>
+    <button className='close-component' onClick={ () => props.transition('NONE') } >
+        <FontAwesomeIcon icon={faXmark } />
+    </button>
   </section>
 )
 

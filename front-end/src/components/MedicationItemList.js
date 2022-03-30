@@ -2,46 +2,60 @@ import React, { Fragment } from "react";
 import axios from "axios";
 import MedicationItem from "./MedicationItem";
 
-
 export default function MedicationItemList(props) {
-  console.log(props)
+
   const medications = props.medications[0].medications;
 
-
+  console.log("MEDICATION", medications)
   const medicationItemList = medications.map((medication) => {
-
-   
-
     const deleteMe = function () {
-
-      axios.delete(`/medications/${medication.id}/delete`)
+      axios.delete(`http://localhost:8081/medications/${medication.id}/delete`)
         .then(() => {
           props.setMedications((prev) => [{ ...prev, medications: props.medications[0].medications.filter(med => med.id !== medication.id) }])
         })
     }
     const medEndDate = (medication) => {
-
       if (medication.end_date) {
         return new Date(medication.end_date)
-
       } else {
-        return new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+        return new Date()
       }
     }
-    console.log("medication START", medication.start_date)
-    console.log("medEndDate BEEFF", medication.end_date)
-    const medStartDate = new Date(medication.start_date);
-    // const medEndDate = new Date(medication.end_date);
-    console.log("medication END", medEndDate(medication))
-    const today = props.date;
 
+    console.log("medication.start_date", medication.start_date)
+    let startDate = medication.start_date
+    const medStartDate =  new Date(medication.start_date)
+
+  let currDate = props.date
+  let today = new Date(currDate.getTime() + 2 * 60000)
+//   if(props.today){
+//         const currDate = props.today
+// return new Date(currDate.getTime() + 2 * 60000)
+//   } else {
+//     const currDate = props.today
+// return new Date(currDate.getTime() + 2 * 60000)
+//   }
+//   }
+    // const medEndDate = var minutesToAdd=30;
+
+;
+     
+    // const today = new Date(new Date().getTime() + 2 * 60000)
+    console.log("MEDICATION", medication) // here exists
+    console.log("DATE", props.date)
+    console.log("medEndDate(medication)", medEndDate(medication))
     console.log("medStartDate", medStartDate)
+
+
     for (let child in props.childrenState) {
+
       // console.log("color", props.childrenState[child].avatar_url);
       const childObj = props.childrenState[child];
-      if (medStartDate <= today && medEndDate(medication) >= today) {
-
+      if (medStartDate <= props.date && medEndDate(medication) >= props.date) {
+        console.log("FIRST IF", medication)
         if (props.childState && props.childState === childObj.id && childObj.id === medication.child_id) {
+          console.log("SECOND ELSE MEDICATOON", medication) // with food null
+
           return (
             <MedicationItem
               color={childObj.avatar_url}
@@ -56,7 +70,7 @@ export default function MedicationItemList(props) {
         }
 
         else if (!props.childState && childObj.id === medication.child_id) {
-          console.log(medication)
+          console.log("THERD ELSE MEDICATOONS", medication) // here no exists
           return (
             <MedicationItem
               color={childObj.avatar_url}
@@ -74,5 +88,5 @@ export default function MedicationItemList(props) {
     }
   });
 
-  return <Fragment>{medicationItemList}</Fragment>;
+  return <>{medicationItemList}</>;
 }
