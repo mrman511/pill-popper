@@ -1,6 +1,6 @@
 {
 
-  "proxy": "https://maps.googleapis.com/maps/api/place/nearbysearch",
+  "proxy": "https://pill-popper.herokuapp.com",
 
   "name": "pill-popper",
   "version": "0.1.0",
