@@ -4,7 +4,6 @@ import { faUsers, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "./components/Calendar";
 import axios from "axios";
 import { io } from "socket.io-client";
-// For testing:
 
 import ChildrenList from "./components/ChildrenList";
 
@@ -35,18 +34,15 @@ export default function App(props) {
   const { mode, transition } = useVisualMode(NONE)
 
 
-  //const [viewCalendar, setViewCalendar] = useState(false);
-  //const [viewUser, setViewUser] = useState(false);
   const [value, onChange] = useState(new Date());
   const [medications, setMedications] = useState([]);
   const [selectedMed, setSelectedMed] = useState({})
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState([])
   const [searchId, setSearchId] = useState()
   const [searchName, setSearchName] = useState()
 
 
   const [state, setState] = useState({
-    // medications: [],
     child: "",
     children: {},
   });
@@ -119,14 +115,11 @@ useEffect(() => {
 },[])
 
   function searchResults(data) {
-    setSearchId(Object.keys(data)[0]);
-    setSearchName(Object.values(data)[0]);
-    console.log("Name and id from api: ", searchId, searchName)
+    setSearch(data)
   }
 
   function clearSearch(){
-    setSearchId(null);
-    setSearchName(null);
+    setSearch([]);
   }
 
   function clearName(){
@@ -196,7 +189,7 @@ useEffect(() => {
           loaderMedications={loaderMedications}
           searchApi={searchApi}
           searchResults={searchResults}
-          searchData={{ id: searchId, name: searchName }} 
+          searchData={ search } 
           clearSearch={ clearSearch } 
           clearName={ clearName } />}
 
@@ -209,7 +202,7 @@ useEffect(() => {
           loaderMedications={loaderMedications}
           searchApi={searchApi}
           searchResults={searchResults}
-          searchData={{ id: searchId, name: searchName }} 
+          searchData={ search } 
           clearSearch={ clearSearch } />}
 
         {mode !== CREATE && mode !== EDIT && mode !== SAVING && mode !== LOADING &&

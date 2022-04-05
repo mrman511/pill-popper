@@ -6,13 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { searchApi } from "../helpers/apiFunctions";
+import { SearchItem } from './formComponents/Search'
 
 export default function Form(props) {
   let childNames;
   let children;
-  //let fdaName;
-  console.log("SEARCHDATA",props.searchData.name, props.searchData.id)
-  //let fdaId = props.searchData.name;
 
   if (props.children) {
     children = Object.values(props.children)
@@ -79,7 +77,6 @@ export default function Form(props) {
 
   const save = (mode) => {
     props.transition("SAVING");
-    console.log(medicationName);
     if (mode === "CREATE") {
       axios.post(`/medications/${childId}/new`, {
         child_id: childId,
@@ -108,7 +105,6 @@ export default function Form(props) {
       })
         .then((res) => {
           props.loaderMedications()
-          console.log('Medication changed successfully!')
           props.transition("NONE");
         })
         .catch(err => console.log('There has been an ERROR: ', err));
@@ -135,6 +131,21 @@ export default function Form(props) {
     </div>
   ))
 
+  const parsedSearchData = props.searchData.map((data) => {
+    const id = data.id;
+    const name = data.name;
+
+    return (< SearchItem className='search-result'
+      key={ id } 
+      name={ name }
+      onClick={ () => { 
+        addFda(id, name); 
+        props.clearSearch()  }}
+      />
+    ); 
+  })
+
+
   return (
     <main className="medication__form">
       <section className="medication__form--main">
@@ -145,9 +156,6 @@ export default function Form(props) {
 
               <select onChange={(event) => setChildId(event.target.value)} name="names" className="name-menu" id="names">
                 <option value="select">Select</option>
-                {/* <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option> */}
                 {childNames}
               </select>}
             {props.mode === "EDIT" && <div><p>{props.childName}</p></div>}
@@ -165,12 +173,7 @@ export default function Form(props) {
               }}
             />
 
-            {props.searchData.id &&
-              <a className="search-result"
-              onClick={ () => { 
-                addFda(props.searchData.id, props.searchData.name); 
-                setMedicationName(props.searchData.name[0])
-                props.clearName() } } >{props.searchData.name}</a>}
+            { parsedSearchData.length > 0 &&  parsedSearchData  }
 
           </div>
 
