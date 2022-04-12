@@ -21,7 +21,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import MyComponent from "./components/Map"
 
 
-
 export default function App(props) {
   const NONE = "NONE";
   const CALENDAR = "CALENDAR";
