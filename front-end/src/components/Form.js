@@ -78,7 +78,7 @@ export default function Form(props) {
   const save = (mode) => {
     props.transition("SAVING");
     if (mode === "CREATE") {
-      axios.post(`http://localhost:8081/medications/${childId}/new`, {
+      axios.post((process.env.REACT_APP_PILL_POPPER_API || 'http://localhost:8081' ) +`/medications/${childId}/new`, {
         child_id: childId,
         name: medicationName,
         dose: dose,
@@ -95,7 +95,7 @@ export default function Form(props) {
         .catch(err => console.log('There has been an ERROR: ', err));
 
     } else if (mode === "EDIT") {
-      axios.put(`http://localhost:8081/medications/${props.medId}/edit`, {
+      axios.put((process.env.REACT_APP_PILL_POPPER_API || 'http://localhost:8081' ) + `/medications/${props.medId}/edit`, {
         child_id: childId,
         name: medicationName,
         dose: dose,

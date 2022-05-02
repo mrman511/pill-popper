@@ -77,7 +77,7 @@ export default function App(props) {
   const loadChildren = () => {
     transition(LOADING)
     axios
-      .get("http://localhost:8081/users/1/children")
+      .get((process.env.REACT_APP_PILL_POPPER_API || 'http://localhost:8081' ) + "/users/1/children")
       .then((res) => {
         setState((prev) => ({
           ...prev,
@@ -93,7 +93,7 @@ export default function App(props) {
   const loaderMedications = () => {
      transition(LOADING);
     axios
-      .get("http://localhost:8081/users/1/medications")
+      .get((process.env.REACT_APP_PILL_POPPER_API || 'http://localhost:8081' ) + "/users/1/medications")
       .then((response) => {
         transition(NONE);
         setMedications((prev) =>
@@ -126,7 +126,7 @@ useEffect(() => {
   }
 
   function editor(medication) {
-    axios.get(`http://localhost:8081/medications/${medication.id}`)
+    axios.get((process.env.REACT_APP_PILL_POPPER_API || 'http://localhost:8081' ) + `/medications/${medication.id}`)
       .then((res) => {
         const data = res.data[0];
         setSelectedMed({

@@ -12,7 +12,7 @@ const ChildrenList = (props) => {
   const [addAChild, setAddAChild] = useState(false)
   
   const addChild = function() {
-    axios.post('http://localhost:8081/users/1/children/new', {
+    axios.post( ((process.env.REACT_APP_PILL_POPPER_API || 'http://localhost:8081' ) + '/users/1/children/new'), {
       name: name,
       avatar: color,
     })
