@@ -32,14 +32,14 @@ const fdaRoutes = require('./routes/fda');
 //const socketServer = require("./socketServer/socketServer");
 app.use(cors())
 
-app.use(
-  "/styles",
-  sassMiddleware({
-    source: __dirname + "/styles",
-    destination: __dirname + "/public/styles",
-    isSass: false, // false => scss, true => sass
-  })
-);
+// app.use(
+//   "/styles",
+//   sassMiddleware({
+//     source: __dirname + "/styles",
+//     destination: __dirname + "/public/styles",
+//     isSass: false, // false => scss, true => sass
+//   })
+// );
 
 //app.use(express.static("public"));
 
